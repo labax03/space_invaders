@@ -18,9 +18,11 @@ Ship::Ship(sf::IntRect ir) : Sprite() {
     setTextureRect(_sprite);
 }
 
-Ship::~Ship() = default;
-
-void Ship::update(const float& dt) {}
+void Ship::update(const float& dt)
+{
+    // Base Ship does nothing.
+    // Player and Invader override this.
+}
 
 bool Ship::is_exploded() const {
     return _exploded;
@@ -50,10 +52,10 @@ void Invader::move_down() {
 }
 
 void Invader::update(const float& dt) {
-    Ship::update(dt);
-
+    // Horizontal movement
     move(dt * (direction ? 1.f : -1.f) * speed, 0.f);
 
+    // Edge bounce
     if ((direction && getPosition().x > param::game_width - param::sprite_size / 2.f) ||
         (!direction && getPosition().x < param::sprite_size / 2.f)) {
 
@@ -64,39 +66,12 @@ void Invader::update(const float& dt) {
             s->move(0.f, 24.f);
     }
 
+    // Random firing
     static float firetime = 0.f;
     firetime -= dt;
 
     if (firetime <= 0.f && rand() % 100 == 0) {
         Bullet::fire(getPosition(), true);
         firetime = 4.f + (rand() % 60);
-    }
-}
-
-// ---------------- PLAYER ----------------
-
-Player::Player() :
-    Ship(sf::IntRect(sf::Vector2i(param::sprite_size * 5, param::sprite_size),
-        sf::Vector2i(param::sprite_size, param::sprite_size))) {
-
-    setOrigin(param::sprite_size / 2.f, param::sprite_size / 2.f);
-    setPosition(param::game_width / 2.f, param::game_height - param::sprite_size);
-}
-
-void Player::update(const float& dt) {
-    Ship::update(dt);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        move(-200.f * dt, 0.f);
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        move(200.f * dt, 0.f);
-
-    static float firetime = 0.f;
-    firetime -= dt;
-
-    if (firetime <= 0.f && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        Bullet::fire(getPosition(), false);
-        firetime = 0.5f;
     }
 }

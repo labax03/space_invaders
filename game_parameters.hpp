@@ -11,5 +11,6 @@ struct Parameters {
     static constexpr float invader_speed = 20.f;
     static constexpr float invader_acc = 2.f;
 
-    static constexpr float bullet_speed = 200.f;   
+    static constexpr float bullet_speed = 200.f; 
+    static constexpr float player_speed = 150.f;
 };

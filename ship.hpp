@@ -6,7 +6,7 @@ public:
     Ship();
     Ship(const Ship& s);
     Ship(sf::IntRect ir);
-    virtual ~Ship() = 0;
+    virtual ~Ship() = default;
 
     virtual void update(const float& dt);
 
@@ -31,12 +31,4 @@ public:
 
     void update(const float& dt) override;
     void move_down();
-};
-
-// ---------------- PLAYER ----------------
-
-class Player : public Ship {
-public:
-    Player();
-    void update(const float& dt) override;
 };

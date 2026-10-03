@@ -12,7 +12,7 @@ private:
     Bullet();
     void _update(const float& dt);
 
-    bool _mode = false;
+    bool _mode = false; // false = player, true = enemy
 
     static unsigned char _bulletPointer;
     static Bullet _bullets[256];

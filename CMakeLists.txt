@@ -15,6 +15,7 @@ add_executable(space_invaders
     main.cpp
     game_system.cpp
     ship.cpp
+    player.cpp
     bullet.cpp
 )
 

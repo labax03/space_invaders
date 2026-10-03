@@ -1,13 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include <memory>
+#include <vector>
 
 class Ship;
+class Player;
 
-struct GameSystem {
+class GameSystem {
+public:
     static sf::Texture spritesheet;
     static std::vector<std::shared_ptr<Ship>> ships;
+    static std::shared_ptr<Player> player;
 
     static void init();
     static void update(const float& dt);
